@@ -1,14 +1,20 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import random
+from dotenv import load_dotenv
+import os
 
 class SpotifyHandler:
 
     # Creates a connection to my spotify client on initialization
     def __init__(self):
+
+        
+        load_dotenv()
+
         self.sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-            client_id='your id',
-            client_secret='your secret',
+            client_id=os.getenv('SPOTIFY_CLIENT_ID'),
+            client_secret=os.getenv('SPOTIFY_CLIENT_SECRET'),
             redirect_uri='http://127.0.0.1:8888/callback',
             scope='playlist-modify-public'
         ))
